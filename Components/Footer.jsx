@@ -28,21 +28,30 @@ export default function Footer() {
         <div className="flex gap-10 py-10">
           <div className=" w-2xs">
             <p className="font-bold my-5 ">BestSeller</p>
-            {products.map((item, index) => (
+            {products
+            .slice()
+            .sort((a,b)=>(a.localeCompare(b)))
+            .map((item, index) => (
               <p key={index}>{item}</p>
             ))}
           </div>
           <div className="w-2xs">
             <p className="font-bold my-5">Information</p>
-            {websitePages.map((item, index) => (
+            {websitePages
+            .slice()
+            .sort((a,b)=>(a.localeCompare(b)))
+            .map((item, index) => (
               <p key={index}>{item}</p>
             ))}
           </div>
           <div className="w-2xs">
             <p className="font-bold my-5">Support</p>
-            {footerLinks.map((item, index) => (
-              <p key={index}>{item}</p>
-            ))}
+            {footerLinks
+              .slice() // Create a shallow copy to avoid modifying the original array
+              .sort((a, b) => a.localeCompare(b)) // Sort alphabetically
+              .map((item, index) => {
+                return <p key={index}>{item}</p>;
+              })}
           </div>
           <div className="w-2xs">
             <p className="font-bold my-5">Contact us</p>
@@ -108,12 +117,17 @@ export default function Footer() {
           <p className=" uppercase my-5">Most Searched Keywords</p>
           <div className=" w-full">
             {productCategories.map((item, index) => (
-              <span key={index} className=" text-[12px]" > {item} |</span>
+              <span key={index} className=" text-[12px]">
+                {" "}
+                {item} |
+              </span>
             ))}
           </div>
         </div>
         <div className="">
-          <p className=" py-5">© 2025, Bella Vita Organic (IDAM Natural Wellness Pvt. Ltd.).</p>
+          <p className=" py-5">
+            © 2025, Bella Vita Organic (IDAM Natural Wellness Pvt. Ltd.).
+          </p>
         </div>
       </div>
     </div>

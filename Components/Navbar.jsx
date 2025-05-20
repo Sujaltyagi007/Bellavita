@@ -8,7 +8,20 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import {
+  useClerk,
+  UserButton,
+  useUser,
+  SignedOut,
+  SignedIn,
+} from "@clerk/nextjs";
+import { useRouter } from 'next/navigation'; // Import useRouter
+
 export default function Navbar() {
+  const { openSignIn } = useClerk();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const router = useRouter(); // Initialize useRouter
+
   const catagories = [
     "carzy deals",
     "shop all",
@@ -35,7 +48,7 @@ export default function Navbar() {
           <button className=" py-1 cursor-pointer text-white" ref={prevRef}>
             <ChevronLeft />
           </button>
-          <button className="  py-1 cursor-pointer text-white" ref={nextRef}>
+          <button className=" py-1 cursor-pointer text-white" ref={nextRef}>
             <ChevronRight />
           </button>
         </div>
@@ -78,8 +91,13 @@ export default function Navbar() {
             <Image width={120} height={70} src={logo} alt={`logo`} />
           </div>
           <div className=" w-1/5 flex justify-center items-center gap-8">
-            <UserRound />
-            <ShoppingCart />
+            {!isSignedIn ? (
+              <UserRound onClick={openSignIn} className="cursor-pointer" />
+            ) : (
+              // Add afterSignOutUrl to UserButton
+              <UserButton  /> 
+            )}
+            <ShoppingCart className=" cursor-pointer" />
           </div>
         </div>
         <div className=" flex justify-center text-sm items-center gap-6 uppercase pt-4">
