@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
-import Image from "next/image"; // Don't forget to import Image
+import ItemVeiw from "@/Pages/ItemVeiw";
 
 export default function page({ params }) {
   const { id } = React.use(params); // Correctly destructure from params
@@ -13,16 +13,16 @@ export default function page({ params }) {
     const fetchData = async () => {
       try {
         const res = await fetch(url);
-        const json = await res.json(); // Await the JSON data
+        const json = await res.json();
         setData(json);
       } catch (err) {
         console.error(err);
       }
     };
     fetchData();
-  }, [id]); 
+  }, [id]);
 
-  if (!data) return <div>Loading...</div>; 
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div>
@@ -30,12 +30,7 @@ export default function page({ params }) {
         <Navbar />
       </div>
       <div className="">
-        <Image
-          src={data.image}
-          width={500}
-          height={500} 
-          alt={`Product image`}
-        />
+        <ItemVeiw data={data} />
       </div>
       <div className="">
         <Footer />

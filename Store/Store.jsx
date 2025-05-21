@@ -100,4 +100,35 @@ export default async function getData({setData}){
   const demoData = data.json();
   setData(demoData);
 }
+
+export const demoCartData=[
+    {
+      id: 1,
+      name: "Bball High",
+      brand: "Common Projects",
+      color: "White",
+      image: "item-1.png",
+      price: 549,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      name: "Future Sneakers",
+      brand: "Maison Margiela",
+      color: "White",
+      image: "item-2.png",
+      price: 870,
+      quantity: 1,
+    },
+    {
+      id: 3,
+      name: "Brushed Scarf",
+      brand: "Our Legacy",
+      color: "Brown",
+      image: "item-3.png",
+      price: 349,
+      quantity: 1,
+    },
+  ]
+
   

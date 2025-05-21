@@ -1,27 +1,19 @@
 import React,{useState} from 'react'
-
-export default function Demo() {
-    const [quantity, setQuantity] = useState(0);
-    const [activeImage, setActiveImage] = useState(0);
+export default function ItemVeiw({data}) {
+    const [quantity, setQuantity] = useState(1);
+    const [activeImage, setActiveImage] = useState(1);
     const [showLightbox, setShowLightbox] = useState(false);
   
-    const images = [
-      "image-product-1.jpg",
-      "image-product-2.jpg",
-      "image-product-3.jpg",
-      "image-product-4.jpg",
-    ];
-  
     const thumbnails = [
-      "image-product-1-thumbnail.jpg",
-      "image-product-2-thumbnail.jpg",
-      "image-product-3-thumbnail.jpg",
-      "image-product-4-thumbnail.jpg",
+      `${data.image}`,
+      `${data.image}`,
+      `${data.image}`,
+      `${data.image}`
     ];
   
     const incrementQuantity = () => setQuantity((prev) => prev + 1);
     const decrementQuantity = () =>
-      setQuantity((prev) => (prev > 0 ? prev - 1 : 0));
+      setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   return (
     <div className="max-w-screen-xl mx-auto min-h-screen p-5">
       <section className="flex gap-32 min-h-[570px] items-center">
@@ -31,7 +23,7 @@ export default function Demo() {
             {/* Main Image */}
             <div className="relative">
               <img
-                src={`images/${images[activeImage]}`}
+                src={`${data.image}`}
                 alt="Main product"
                 className="max-w-full max-h-[445px] rounded-lg cursor-pointer"
                 onClick={() => setShowLightbox(true)}
@@ -51,7 +43,7 @@ export default function Demo() {
                   onClick={() => setActiveImage(index)}
                 >
                   <img
-                    src={`images/${thumb}`}
+                    src={`${thumb}`}
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full rounded-lg"
                   />
@@ -63,23 +55,21 @@ export default function Demo() {
 
         {/* Product Info */}
         <div className="flex-1">
-          <h3 className="text-orange-500 text-lg">SNEAKER COMPANY</h3>
-          <h2 className="text-4xl my-4">Fall Limited Edition Sneakers</h2>
+          <h3 className="text-orange-500 text-lg uppercase ">{data.category}</h3>
+          <h2 className="text-4xl my-4">{data.title}</h2>
           <p className="text-gray-600 mb-8">
-            These low-profile sneakers are your perfect casual wear companion.
-            Featuring a durable rubber outer sole, they'll withstand everything
-            the weather can offer.
+            {data.description}
           </p>
 
           {/* Price Info */}
           <div className="flex items-center gap-6 mb-8">
             <div className="text-2xl font-semibold">
-              <span className="text-black">$125.00</span>
+              <span className="text-black">${data.price*quantity}</span>
               <span className="bg-orange-100 text-orange-500 px-2 rounded-full ml-4 font-bold">
                 50%
               </span>
             </div>
-            <div className="text-lg text-gray-500 line-through">$250.00</div>
+            <div className="text-lg text-gray-500 line-through">${data.price*2*quantity}</div>
           </div>
 
           {/* Add to Cart */}
@@ -102,7 +92,7 @@ export default function Demo() {
             </div>
 
             {/* Add to Cart Button */}
-            <button className="flex items-center justify-center bg-orange-500 text-white font-semibold py-3 px-6 rounded-lg gap-3 hover:bg-orange-600">
+            <button className="flex items-center justify-center cursor-pointer bg-orange-500 text-white font-semibold py-3 px-6 rounded-lg gap-3 hover:bg-orange-600">
               <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"

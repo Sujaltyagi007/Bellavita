@@ -15,7 +15,8 @@ import {
   SignedOut,
   SignedIn,
 } from "@clerk/nextjs";
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { useRouter } from "next/navigation"; // Import useRouter
+import Link from "next/link";
 
 export default function Navbar() {
   const { openSignIn } = useClerk();
@@ -95,9 +96,16 @@ export default function Navbar() {
               <UserRound onClick={openSignIn} className="cursor-pointer" />
             ) : (
               // Add afterSignOutUrl to UserButton
-              <UserButton  /> 
+              <UserButton />
             )}
-            <ShoppingCart className=" cursor-pointer" />
+            <div className="flex">
+              <Link href={`cart`}>
+                <ShoppingCart className=" cursor-pointer" />
+                <span className=" h-fit p-1 w-4 flex justify-center items-center -translate-1.5 -translate-x-2 text-white font-bold rounded-full bg-red-500/50 text-[6px]">
+                  1
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
         <div className=" flex justify-center text-sm items-center gap-6 uppercase pt-4">
