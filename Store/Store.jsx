@@ -95,11 +95,6 @@ export const productCategories = [
   "Gifts for Women Under 500",
   "Corporate Gifts",
 ];
-export default async function getData({setData}){
-  const data = await fetch('');
-  const demoData = data.json();
-  setData(demoData);
-}
 
 export const demoCartData=[
     {

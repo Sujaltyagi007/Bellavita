@@ -8,6 +8,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import "./globals.css";
+import CartProvider from "@/Store/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,13 +28,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider afterSignOutUrl="/home" >
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </html>
+      <CartProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+          </body>
+        </html>
+      </CartProvider>
     </ClerkProvider>
   );
 }

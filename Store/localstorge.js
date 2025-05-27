@@ -1,3 +1,4 @@
+'use client'
 const Cart_Key = 'my-cart'
 export const loadCart = () => {
     try {

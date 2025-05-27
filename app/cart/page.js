@@ -1,23 +1,10 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import demoCartData from '@/Store/Store'
-
+import { CartContext } from '@/Store/CartContext'
 export default function CartVeiw() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchdata = async () => {
-      try {
-        const Demodata = demoCartData;
-        const json = Demodata.json();
-        setData(json);
-        console.log(data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    fetchdata();
-  }, [])
+  const Cart = useContext(CartContext);
+  const Data = Cart.cart;
   const [items, setItems] = useState();
   const handleIncrement = (id) => {
     const updateditem = items.map((item) =>
@@ -41,7 +28,7 @@ export default function CartVeiw() {
         <div className="h-15 border-b border-[#E1E8EE] px-8 py-5 text-[#5E6977] text-xl font-normal">
           Shopping Cart
         </div>
-        {items.map((item, index) => (
+        {Data && Data.map((item, index) => (
           <div key={item.id} className={`px-8 py-5 h-auto md:h-30 flex ${index === 1 ? "border-t border-b border-[#E1E8EE]" : ""
             }`}
           >

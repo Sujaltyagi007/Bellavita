@@ -99,7 +99,7 @@ export default function Navbar() {
               <UserButton />
             )}
             <div className="flex">
-              <Link href={`cart`}>
+              <Link href={`/cart`}>
                 <ShoppingCart className=" cursor-pointer" />
                 <span className=" h-fit p-1 w-4 flex justify-center items-center -translate-1.5 -translate-x-2 text-white font-bold rounded-full bg-red-500/50 text-[6px]">
                   1
